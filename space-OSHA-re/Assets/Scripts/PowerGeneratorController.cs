@@ -35,7 +35,6 @@ public class PowerGeneratorController : MonoBehaviour
             if (PowerLevel > 0)
             {
                 PowerLevel -= 5;
-                Debug.Log(PowerLevel);
             }
             powerDropTimer = powerDropInterval;
         }

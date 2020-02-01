@@ -10,7 +10,6 @@ public class WaterGeneratorController : MonoBehaviour
     public Text DisplayText;
 
     public bool IsActivated;
-    public bool IsOnFire;
     private SpriteRenderer sprite;
 
     public float Interval;
@@ -23,7 +22,6 @@ public class WaterGeneratorController : MonoBehaviour
         WaterDecrements = 2;
 
         IsActivated = true;
-        IsOnFire = false;
         sprite = GetComponent<SpriteRenderer>();
 
         Interval = 0.5f;
@@ -56,8 +54,6 @@ public class WaterGeneratorController : MonoBehaviour
             {
                 if (WaterLevel < 100) WaterLevel += WaterDecrements;
                 DisplayText.text = "Water Level: " + WaterLevel.ToString();
-                float combustionCheck = Random.Range(0, 100);
-                if (combustionCheck < 5f) SetFireState(true);
                 TimeElapsed = 0f;
             }
         }
@@ -70,22 +66,6 @@ public class WaterGeneratorController : MonoBehaviour
         Color spriteColor = sprite.color;
         spriteColor.a = value ? 1 : 0.5f;
         sprite.color = spriteColor;
-    }
-
-    public void SetFireState(bool value)
-    {
-        IsOnFire = value;
-        Color spriteColor = sprite.color;
-        spriteColor = value ? Color.red : Color.white;
-        sprite.color = spriteColor;
-    }
-
-    void OnTriggerStay2D(Collider2D collide)
-    {
-        if (collide.gameObject.tag == "Player" && IsOnFire && Input.GetKeyDown("e"))
-        {
-            SetFireState(false);
-        }
     }
 }
 

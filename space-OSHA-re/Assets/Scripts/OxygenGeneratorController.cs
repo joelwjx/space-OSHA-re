@@ -10,7 +10,6 @@ public class OxygenGeneratorController : MonoBehaviour
     public Text DisplayText;
 
     public bool IsActivated;
-    public bool IsOnFire;
     private SpriteRenderer sprite;
 
     public float Interval;
@@ -23,7 +22,6 @@ public class OxygenGeneratorController : MonoBehaviour
         OxygenDecrements = 5;
 
         IsActivated = true;
-        IsOnFire = false;
         sprite = GetComponent<SpriteRenderer>();
 
         Interval = 0.5f;
@@ -33,7 +31,7 @@ public class OxygenGeneratorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!IsActivated || IsOnFire)
+        if (!IsActivated)
         {
             if (TimeElapsed <= Interval)
             {
@@ -56,10 +54,7 @@ public class OxygenGeneratorController : MonoBehaviour
             {
                 if (OxygenLevel < 100) OxygenLevel += OxygenDecrements;
                 DisplayText.text = "Oxygen Level: " + OxygenLevel.ToString();
-                float combustionCheck = Random.Range(0, 100);
 
-                Debug.Log(combustionCheck);
-                if (combustionCheck < 5f) SetFireState(true);
                 TimeElapsed = 0f;
             }
         }
@@ -71,22 +66,5 @@ public class OxygenGeneratorController : MonoBehaviour
         Color spriteColor = sprite.color;
         spriteColor.a = value ? 1 : 0.5f;
         sprite.color = spriteColor;
-    }
-
-    public void SetFireState(bool value)
-    {
-        IsOnFire = value;
-        Color spriteColor = sprite.color;
-        spriteColor = value ? Color.red : Color.white;
-        sprite.color = spriteColor;
-    }
-
-    void OnTriggerStay2D(Collider2D collide)
-    {
-        if (collide.gameObject.tag == "Player" && IsOnFire && Input.GetKeyDown("e"))
-        {
-            Debug.Log("Clicked");
-            SetFireState(false);
-        }
     }
 }

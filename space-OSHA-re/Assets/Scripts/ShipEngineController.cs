@@ -9,14 +9,12 @@ public class ShipEngineController : MonoBehaviour
     public Text DisplayText;
 
     public bool IsActivated;
-    public bool IsOnFire;
     private SpriteRenderer sprite;
 
     // Start is called before the first frame update
     void Start()
     {
         IsActivated = true;
-        IsOnFire = false;
         sprite = GetComponent<SpriteRenderer>();
 
         DistanceTravelled = 0f;
@@ -27,11 +25,8 @@ public class ShipEngineController : MonoBehaviour
     {
         if (IsActivated)
         {
-            if (!IsOnFire) DistanceTravelled += Time.deltaTime;
+            DistanceTravelled += Time.deltaTime;
             DisplayText.text = "Distance: " + ((int)DistanceTravelled).ToString();
-
-            float combustionCheck = Random.Range(0, 1000);
-            if (combustionCheck < 0.5) SetFireState(true);
         }
     }
 
@@ -41,22 +36,5 @@ public class ShipEngineController : MonoBehaviour
         Color spriteColor = sprite.color;
         spriteColor.a = value ? 1 : 0.5f;
         sprite.color = spriteColor;
-    }
-
-    public void SetFireState(bool value)
-    {
-        IsOnFire = value;
-        Color spriteColor = sprite.color;
-        spriteColor = value ? Color.red : Color.white;
-        sprite.color = spriteColor;
-    }
-
-    void OnTriggerStay2D(Collider2D collide)
-    {
-        if (collide.gameObject.tag == "Player" && IsOnFire && Input.GetKeyDown("e"))
-        {
-            Debug.Log("Clicked");
-            SetFireState(false);
-        }
     }
 }
