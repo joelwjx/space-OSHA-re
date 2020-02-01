@@ -40,7 +40,7 @@ public class WaterGeneratorController : MonoBehaviour
             else
             {
                 if (WaterLevel > 0) WaterLevel -= WaterDecrements;
-                DisplayText.text = "Water Level: " + WaterLevel.ToString();
+                DisplayText.text = WaterLevel.ToString("000");
                 TimeElapsed = 0f;
             }
         }
@@ -53,7 +53,7 @@ public class WaterGeneratorController : MonoBehaviour
             else
             {
                 if (WaterLevel < 100) WaterLevel += WaterDecrements;
-                DisplayText.text = "Water Level: " + WaterLevel.ToString();
+                DisplayText.text = WaterLevel.ToString("000");
                 TimeElapsed = 0f;
             }
         }

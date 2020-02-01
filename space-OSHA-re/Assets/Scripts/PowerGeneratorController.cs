@@ -39,7 +39,7 @@ public class PowerGeneratorController : MonoBehaviour
             powerDropTimer = powerDropInterval;
         }
 
-        DisplayText.text = "Power Level: " + PowerLevel.ToString();
+        DisplayText.text = PowerLevel.ToString("000");
     }
 
     void OnTriggerStay2D(Collider2D collide)

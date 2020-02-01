@@ -40,7 +40,7 @@ public class OxygenGeneratorController : MonoBehaviour
             else
             {
                 if (OxygenLevel > 0) OxygenLevel -= OxygenDecrements;
-                DisplayText.text = "Oxygen Level: " + OxygenLevel.ToString();
+                DisplayText.text = OxygenLevel.ToString("000");
                 TimeElapsed = 0f;
             }
         }
@@ -53,7 +53,7 @@ public class OxygenGeneratorController : MonoBehaviour
             else
             {
                 if (OxygenLevel < 100) OxygenLevel += OxygenDecrements;
-                DisplayText.text = "Oxygen Level: " + OxygenLevel.ToString();
+                DisplayText.text = OxygenLevel.ToString("000");
 
                 TimeElapsed = 0f;
             }

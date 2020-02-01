@@ -26,7 +26,7 @@ public class ShipEngineController : MonoBehaviour
         if (IsActivated)
         {
             DistanceTravelled += Time.deltaTime;
-            DisplayText.text = "Distance: " + ((int)DistanceTravelled).ToString();
+            DisplayText.text = ((int)DistanceTravelled).ToString("000");
         }
     }
 
