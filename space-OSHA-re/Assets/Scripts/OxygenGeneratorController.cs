@@ -40,6 +40,7 @@ public class OxygenGeneratorController : MonoBehaviour
             else
             {
                 if (OxygenLevel > 0) OxygenLevel -= OxygenDecrements;
+                if (OxygenLevel <= 0) GameStateManager.instance.InitiateLoseState();
                 DisplayText.text = OxygenLevel.ToString("000");
                 TimeElapsed = 0f;
             }
