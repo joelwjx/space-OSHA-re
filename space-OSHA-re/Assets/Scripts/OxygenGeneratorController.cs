@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OxygenGeneratorController : MonoBehaviour
+public class OxygenGeneratorController : Subsystem
 {
     public int OxygenLevel;
     public int OxygenDecrements;
     public Text DisplayText;
+    public PowerGeneratorController generator;
 
-    public bool IsActivated;
     private SpriteRenderer sprite;
 
     public float Interval;
@@ -21,7 +21,8 @@ public class OxygenGeneratorController : MonoBehaviour
         OxygenLevel = 50;
         OxygenDecrements = 5;
 
-        IsActivated = true;
+        isActivated = true;
+        powerLevel = generator.PowerLevel;
         sprite = GetComponent<SpriteRenderer>();
 
         Interval = 0.5f;
@@ -31,7 +32,7 @@ public class OxygenGeneratorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!IsActivated)
+        if (!isActivated)
         {
             if (TimeElapsed <= Interval)
             {
@@ -63,7 +64,7 @@ public class OxygenGeneratorController : MonoBehaviour
 
     public void SetActiveState(bool value)
     {
-        IsActivated = value;
+        isActivated = value;
         Color spriteColor = sprite.color;
         spriteColor.a = value ? 1 : 0.5f;
         sprite.color = spriteColor;

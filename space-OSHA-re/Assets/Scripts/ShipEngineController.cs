@@ -3,27 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShipEngineController : MonoBehaviour
+public class ShipEngineController : Subsystem
 {
     public float DistanceTravelled;
     public Text DisplayText;
+    public PowerGeneratorController generator;
 
-    public bool IsActivated;
     private SpriteRenderer sprite;
-
+    
     // Start is called before the first frame update
     void Start()
     {
-        IsActivated = true;
+        isActivated = true;
         sprite = GetComponent<SpriteRenderer>();
 
+        powerLevel = generator.PowerLevel;
         DistanceTravelled = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (IsActivated)
+        powerLevel = generator.PowerLevel;
+        if (isActivated)
         {
             DistanceTravelled += Time.deltaTime;
             DisplayText.text = ((int)DistanceTravelled).ToString("000");
@@ -32,7 +34,7 @@ public class ShipEngineController : MonoBehaviour
 
     public void SetActiveState(bool value)
     {
-        IsActivated = value;
+        isActivated = value;
         Color spriteColor = sprite.color;
         spriteColor.a = value ? 1 : 0.5f;
         sprite.color = spriteColor;

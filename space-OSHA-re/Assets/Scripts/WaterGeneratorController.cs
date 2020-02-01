@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WaterGeneratorController : MonoBehaviour
+public class WaterGeneratorController : Subsystem
 {
     public int WaterLevel;
     public int WaterDecrements;
     public Text DisplayText;
+    public PowerGeneratorController generator;
 
-    public bool IsActivated;
     private SpriteRenderer sprite;
 
     public float Interval;
@@ -21,17 +21,19 @@ public class WaterGeneratorController : MonoBehaviour
         WaterLevel = 50;
         WaterDecrements = 2;
 
-        IsActivated = true;
+        isActivated = true;
         sprite = GetComponent<SpriteRenderer>();
 
         Interval = 0.5f;
         TimeElapsed = 0f;
+        powerLevel = generator.PowerLevel;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!IsActivated)
+        powerLevel = generator.PowerLevel;
+        if (!isActivated)
         {
             if (TimeElapsed <= Interval)
             {
@@ -62,7 +64,7 @@ public class WaterGeneratorController : MonoBehaviour
 
     public void SetActiveState(bool value)
     {
-        IsActivated = value;
+        isActivated = value;
         Color spriteColor = sprite.color;
         spriteColor.a = value ? 1 : 0.5f;
         sprite.color = spriteColor;

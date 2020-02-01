@@ -20,7 +20,7 @@ public class Flammable : MonoBehaviour
     public float FixBurnMeter;
     public float FixBurnRating;
     public GameObject ProgressBar;
-
+    public Image FireIcon;
     public float GraceInterval;
     public float GraceTimer;
 
@@ -29,7 +29,7 @@ public class Flammable : MonoBehaviour
     public delegate void BurnEvent();
     public static event BurnEvent StartBurning;
 
-    private SpriteRenderer sprite;
+    [SerializeField] private SpriteRenderer sprite;
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +50,7 @@ public class Flammable : MonoBehaviour
         GraceInterval = 10f;
         GraceTimer = 0;
 
-        sprite = GetComponent<SpriteRenderer>();
+        if(!sprite) sprite = GetComponent<SpriteRenderer>();
 
         ProgressBar.transform.localScale = new Vector3(0, 0.1f, 0);
 
@@ -124,6 +124,7 @@ public class Flammable : MonoBehaviour
         IsIgniting = false;
         IsBurning = true;
         BreakTimer = TimeToBreak;
+        if(FireIcon) FireIcon.gameObject.SetActive(true);
 
         SetSpriteColor(Color.red);
     }
@@ -158,7 +159,7 @@ public class Flammable : MonoBehaviour
         Debug.Log("Extinguish");
         IsBurning = false;
         IsIgniting = false;
-
+        if(FireIcon) FireIcon.gameObject.SetActive(false);
         BurnTimer = 0;
         BreakTimer = 0;
 

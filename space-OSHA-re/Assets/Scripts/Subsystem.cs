@@ -8,7 +8,6 @@ public abstract class Subsystem : MonoBehaviour
     public int powerLevel { get; protected set; }
     public bool isPowered => powerLevel > 0;
 
-    public bool isOnFire { get; protected set; }
     public bool isActivated { get; protected set; }
 
 }
