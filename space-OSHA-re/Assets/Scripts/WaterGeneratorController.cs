@@ -19,12 +19,12 @@ public class WaterGeneratorController : Subsystem
     void Start()
     {
         WaterLevel = 50;
-        WaterDecrements = 2;
+        WaterDecrements = 3;
 
         isActivated = true;
         sprite = GetComponent<SpriteRenderer>();
 
-        Interval = 0.5f;
+        Interval = 5;
         TimeElapsed = 0f;
         powerLevel = generator.PowerLevel;
     }
@@ -59,7 +59,6 @@ public class WaterGeneratorController : Subsystem
                 TimeElapsed = 0f;
             }
         }
-
     }
 
     public void SetActiveState(bool value)

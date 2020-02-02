@@ -7,6 +7,7 @@ public class OxygenGeneratorController : Subsystem
 {
     public int OxygenLevel;
     public int OxygenDecrements;
+    public int OxygenIncrements;
     public Text DisplayText;
     public PowerGeneratorController generator;
 
@@ -20,6 +21,7 @@ public class OxygenGeneratorController : Subsystem
     {
         OxygenLevel = 50;
         OxygenDecrements = 5;
+        OxygenIncrements = 1;
 
         isActivated = true;
         powerLevel = generator.PowerLevel;
@@ -54,7 +56,7 @@ public class OxygenGeneratorController : Subsystem
             }
             else
             {
-                if (OxygenLevel < 100) OxygenLevel += OxygenDecrements;
+                if (OxygenLevel < 100) OxygenLevel += OxygenIncrements;
                 DisplayText.text = OxygenLevel.ToString("000");
 
                 TimeElapsed = 0f;
