@@ -27,7 +27,7 @@ public class GameStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GoalDistance = 100;
+        GoalDistance = Engine.GoalDistance; 
         DistanceTravelled = Engine.DistanceTravelled;
     }
 

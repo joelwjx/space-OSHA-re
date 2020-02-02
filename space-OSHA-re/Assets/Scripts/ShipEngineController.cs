@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class ShipEngineController : Subsystem
 {
     public float DistanceTravelled;
-    public Text DisplayText;
+    public float GoalDistance;
+    public GameObject LevelDisplay;
 
     private SpriteRenderer sprite;
     
@@ -17,6 +18,8 @@ public class ShipEngineController : Subsystem
         sprite = GetComponent<SpriteRenderer>();
 
         DistanceTravelled = 0f;
+        GoalDistance = 100f;
+        LevelDisplay.transform.localScale = new Vector3((DistanceTravelled / GoalDistance) * 9, 0.1f, 0);
     }
 
     // Update is called once per frame
@@ -25,7 +28,7 @@ public class ShipEngineController : Subsystem
         if (isActivated)
         {
             DistanceTravelled += Time.deltaTime;
-            DisplayText.text = ((int)DistanceTravelled).ToString("000");
+            LevelDisplay.transform.localScale = new Vector3((DistanceTravelled / GoalDistance) * 9, 0.1f, 0);
         }
     }
 

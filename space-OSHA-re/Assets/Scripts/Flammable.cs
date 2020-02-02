@@ -88,6 +88,7 @@ public class Flammable : MonoBehaviour
                 else
                 {
                     BurnTimer -= Time.deltaTime;
+                    ResetFixProgress();
                 }
             }
             else
@@ -106,6 +107,7 @@ public class Flammable : MonoBehaviour
                 else
                 {
                     BreakTimer -= Time.deltaTime;
+                    ResetFixProgress();
                 }
             }
             else
@@ -119,7 +121,7 @@ public class Flammable : MonoBehaviour
     {
         IsIgniting = true;
         BurnTimer = TimeToBurn;
-        FixMeter = 0;
+        ResetFixProgress();
 
         SetSpriteColor(Color.yellow);
     }
@@ -128,7 +130,7 @@ public class Flammable : MonoBehaviour
     {
         IsIgniting = false;
         IsBurning = true;
-        FixMeter = 0;
+        ResetFixProgress();
         BreakTimer = TimeToBreak;
         if(FireIcon) FireIcon.gameObject.SetActive(true);
 
@@ -140,16 +142,22 @@ public class Flammable : MonoBehaviour
         IsIgniting = false;
         IsBurning = false;
         IsBroken = true;
-        FixMeter = 0;
+        ResetFixProgress();
 
         // send break event
         SetSpriteColor(Color.black);
     }
 
+    void ResetFixProgress()
+    {
+        FixMeter = 0;
+        ProgressBar.transform.localScale = new Vector3(0, 2f, 0);
+    }
+
     void FixIgniting()
     {
         FixMeter += Time.deltaTime;
-        ProgressBar.transform.localScale = new Vector3(FixMeter / FixIgniteRating * 2, 0.1f, 0);
+        ProgressBar.transform.localScale = new Vector3(FixMeter / FixIgniteRating * 30f, 2f, 0);
         if (FixMeter >= FixIgniteRating)
         {
             Extinguish();
@@ -159,7 +167,7 @@ public class Flammable : MonoBehaviour
     void FixBurning()
     {
         FixMeter += Time.deltaTime;
-        ProgressBar.transform.localScale = new Vector3(FixMeter / FixBurnRating * 2, 0.1f, 0);
+        ProgressBar.transform.localScale = new Vector3(FixMeter / FixBurnRating * 30, 2f, 0);
         if (FixMeter >= FixBurnRating)
         {
             Extinguish();
@@ -175,10 +183,9 @@ public class Flammable : MonoBehaviour
         BreakTimer = 0;
 
         SetSpriteColor(Color.white);
-        FixMeter = 0;
+        ResetFixProgress();
 
         GraceTimer = GraceInterval;
-        ProgressBar.transform.localScale = new Vector3(0, 0.1f, 0);
     }
 
     void OnTriggerEnter2D(Collider2D collider)

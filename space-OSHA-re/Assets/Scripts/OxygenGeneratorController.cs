@@ -27,7 +27,7 @@ public class OxygenGeneratorController : Subsystem
         isActivated = true;
         sprite = GetComponent<SpriteRenderer>();
 
-        Interval = 0.5f;
+        Interval = 3f;
         TimeElapsed = 0f;
     }
 
@@ -43,7 +43,6 @@ public class OxygenGeneratorController : Subsystem
             else
             {
                 if (OxygenLevel > 0) OxygenLevel -= OxygenDecrements;
-                if (OxygenLevel <= 0) GameStateManager.instance.InitiateLoseState();
                 LevelDisplay.transform.localScale = new Vector3((OxygenLevel / 100f) * 2, 0.1f, 0);
                 TimeElapsed = 0f;
             }
@@ -61,6 +60,7 @@ public class OxygenGeneratorController : Subsystem
                 TimeElapsed = 0f;
             }
         }
+        if (OxygenLevel <= 0) GameStateManager.instance.InitiateLoseState();
     }
 
     public void SetActiveState(bool value)
