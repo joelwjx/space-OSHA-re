@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eb8315bf2fcb434d908ab433cf12b6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  foundMessage: Mega Hazard!
   onFound:
     m_PersistentCalls:
       m_Calls:

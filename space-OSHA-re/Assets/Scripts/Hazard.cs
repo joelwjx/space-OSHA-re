@@ -6,6 +6,9 @@ public class Hazard : MonoBehaviour
 {
     public static int hazardsFound { get; private set; }
 
+    [SerializeField, Tooltip("The message to display when the player finds and interacts with this hazard")]
+    private string foundMessage;
+
     public UnityEngine.Events.UnityEvent onFound;
 
     private bool playerInArea;
@@ -22,6 +25,10 @@ public class Hazard : MonoBehaviour
         if(!found && playerInArea && Input.GetKeyDown("e"))
         {
             found = true;
+            if(foundMessage != null && foundMessage.Length > 0)
+            {
+                HazardMessage.Instance.PlayMessage(foundMessage);
+            }
             hazardsFound++;
             onFound.Invoke();
         }
