@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// When spawning an object, have it grow in scale from (0,0,1) to (1,1,1)
-public class GrowIn : MonoBehaviour
+// Probably should be called "shrink out", but I like the consistency more
+public class GrowOut : MonoBehaviour
 {
     [SerializeField] private float growTime;
     [SerializeField] private float initialDelay;
     [SerializeField] private AnimationCurve xSizeCurve;
     [SerializeField] private AnimationCurve ySizeCurve;
 
-    // Start is called before the first frame update
-    void Start()
+    public UnityEngine.Events.UnityEvent onGrowEnd;
+
+    public void StartGrow()
     {
         StartCoroutine(GrowRoutine());
     }
@@ -27,9 +28,8 @@ public class GrowIn : MonoBehaviour
 
         float timer = 0;
         Vector3 initialScale = transform.localScale;
-        transform.localScale = new Vector3(0, 0, 1);
 
-        while(timer < growTime)
+        while (timer < growTime)
         {
             float e = Mathf.Lerp(0, 1, timer / growTime);
             Vector3 normalizedScale = new Vector3(
@@ -40,6 +40,7 @@ public class GrowIn : MonoBehaviour
             yield return null;
             timer += Time.deltaTime;
         }
-        transform.localScale = initialScale;
+        transform.localScale = new Vector3(0, 0, 1);
+        onGrowEnd.Invoke();
     }
 }
