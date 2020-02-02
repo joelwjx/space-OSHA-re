@@ -17,9 +17,11 @@ public class Flammable : MonoBehaviour
     public float TimeToBreak;
     public float BreakTimer;
 
-    public float FixBurnMeter;
+    public float FixMeter;
+    public float FixIgniteRating;
     public float FixBurnRating;
-    public GameObject ProgressBar;
+    public GameObject ProgressBarPrefab;
+    private GameObject ProgressBar;
     public Image FireIcon;
     public float GraceInterval;
     public float GraceTimer;
@@ -45,15 +47,15 @@ public class Flammable : MonoBehaviour
         BreakTimer = 0;
 
         FixBurnRating = 3f;
-        FixBurnMeter = 0;
+        FixIgniteRating = 1f;
+        FixMeter = 0;
 
         GraceInterval = 10f;
         GraceTimer = 0;
 
         if(!sprite) sprite = GetComponent<SpriteRenderer>();
 
-        ProgressBar.transform.localScale = new Vector3(0, 0.1f, 0);
-
+        ProgressBar = Instantiate(ProgressBarPrefab, gameObject.transform, false);
     }
 
     // Update is called once per frame
@@ -79,50 +81,54 @@ public class Flammable : MonoBehaviour
         {
             if (BurnTimer > 0)
             {
-                BurnTimer -= Time.deltaTime;
+                if (Input.GetKey("e") && PlayerInArea)
+                {
+                    FixIgniting();
+                }
+                else
+                {
+                    BurnTimer -= Time.deltaTime;
+                }
             }
             else
             {
                 Burn();
-            }
-
-            if (Input.GetKeyDown("e") && PlayerInArea)
-            {
-                FixIgniting();
             }
         }
         else if (IsBurning)
         {
             if (BreakTimer > 0)
             {
-                BreakTimer -= Time.deltaTime;
+                if (Input.GetKey("e") && PlayerInArea)
+                {
+                    FixBurning();
+                }
+                else
+                {
+                    BreakTimer -= Time.deltaTime;
+                }
             }
             else
             {
                 Break();
-            }
-
-            if (Input.GetKey("e") && PlayerInArea)
-            {
-                FixBurning();
             }
         }
     }
 
     void Ignite()
     {
-
         IsIgniting = true;
         BurnTimer = TimeToBurn;
+        FixMeter = 0;
 
         SetSpriteColor(Color.yellow);
     }
 
     void Burn()
     {
-        Debug.Log("Burn");
         IsIgniting = false;
         IsBurning = true;
+        FixMeter = 0;
         BreakTimer = TimeToBreak;
         if(FireIcon) FireIcon.gameObject.SetActive(true);
 
@@ -131,24 +137,30 @@ public class Flammable : MonoBehaviour
 
     void Break()
     {
-        Debug.Log("Break");
         IsIgniting = false;
         IsBurning = false;
         IsBroken = true;
+        FixMeter = 0;
+
         // send break event
         SetSpriteColor(Color.black);
     }
 
     void FixIgniting()
     {
-        Extinguish();
+        FixMeter += Time.deltaTime;
+        ProgressBar.transform.localScale = new Vector3(FixMeter / FixIgniteRating * 2, 0.1f, 0);
+        if (FixMeter >= FixIgniteRating)
+        {
+            Extinguish();
+        }
     }
 
     void FixBurning()
     {
-        FixBurnMeter += Time.deltaTime;
-        ProgressBar.transform.localScale = new Vector3(FixBurnMeter / FixBurnRating * 2, 0.1f, 0);
-        if (FixBurnMeter >= FixBurnRating)
+        FixMeter += Time.deltaTime;
+        ProgressBar.transform.localScale = new Vector3(FixMeter / FixBurnRating * 2, 0.1f, 0);
+        if (FixMeter >= FixBurnRating)
         {
             Extinguish();
         }
@@ -164,7 +176,7 @@ public class Flammable : MonoBehaviour
         BreakTimer = 0;
 
         SetSpriteColor(Color.white);
-        FixBurnMeter = 0;
+        FixMeter = 0;
 
         GraceTimer = GraceInterval;
         ProgressBar.transform.localScale = new Vector3(0, 0.1f, 0);
