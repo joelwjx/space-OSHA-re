@@ -9,11 +9,14 @@ public class PlayerController : MonoBehaviour
     private bool isOnLadder;
     private Rigidbody2D rb;
 
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         isOnLadder = false;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -21,6 +24,9 @@ public class PlayerController : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+
+        animator.SetBool("IsMoving", Mathf.Abs(horizontalInput) >= 0.01);
+
         SpriteRenderer mySpriteRenderer = GetComponent<SpriteRenderer>();
         if (horizontalInput > 0)
         {
@@ -36,6 +42,7 @@ public class PlayerController : MonoBehaviour
         if (isOnLadder && verticalInput > 0)
         {
             rb.gravityScale = 0;
+            animator.SetBool("IsClimbing", true);
         }
     }
 
@@ -43,7 +50,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 movement = new Vector3(horizontalInput, isOnLadder ? verticalInput : 0);
         //rb.MovePosition(((Vector2)transform.position + new Vector2(horizontalMove, 0)));
-        transform.position += movement * Time.deltaTime * 7.5f;
+        transform.position += movement * Time.deltaTime * 10f;
     }
 
     void OnTriggerEnter2D(Collider2D other)

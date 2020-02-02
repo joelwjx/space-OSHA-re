@@ -46,10 +46,10 @@ public class Flammable : MonoBehaviour
         IsBurning = false;
         IsBroken = false;
 
-        TimeToBurn = 20f;
+        TimeToBurn = 30f;
         BurnTimer = 0;
 
-        TimeToBreak = 30f;
+        TimeToBreak = 60f;
         BreakTimer = 0;
 
         FixBurnRating = 3f;
