@@ -1,24 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    private SpriteRenderer sprite;
-
-    // Start is called before the first frame update
-    void Start()
+    private void ChangeSprites(Transform t, float a)
     {
-        sprite = GetComponent<SpriteRenderer>();
+        var sr = t.GetComponent<SpriteRenderer>();
+        if (sr)
+        {
+            Color spriteColor = sr.color;
+            spriteColor.a = a;
+            sr.color = spriteColor;
+        }
+
+        for (int i = 0; i < t.childCount; i++)
+        {
+            ChangeSprites(t.GetChild(i), a);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collide)
     {
         if (collide.gameObject.tag == "Player")
         {
-            Color spriteColor = sprite.color;
-            spriteColor.a = 0.5f;
-            sprite.color = spriteColor;
+            ChangeSprites(transform, 0.5f);
         }
     }
 
@@ -26,9 +30,7 @@ public class Interactable : MonoBehaviour
     {
         if (collide.gameObject.tag == "Player")
         {
-            Color spriteColor = sprite.color;
-            spriteColor.a = 1;
-            sprite.color = spriteColor;
+            ChangeSprites(transform, 1);
         }
     }
 }

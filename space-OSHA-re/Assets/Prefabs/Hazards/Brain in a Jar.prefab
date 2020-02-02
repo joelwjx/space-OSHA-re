@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 691465344}
   - component: {fileID: 7818257534176704282}
   - component: {fileID: 312118332017533938}
+  - component: {fileID: 6548164958780850743}
   m_Layer: 0
   m_Name: Brain in a Jar
   m_TagString: Untagged
@@ -726,3 +727,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6548164958780850743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2556506270222477180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84f9277cc1ba1bc43810da93cacdded0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
