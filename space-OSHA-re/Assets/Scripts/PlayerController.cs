@@ -25,6 +25,17 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
+        if (Input.GetKey("e"))
+        {
+            horizontalInput = 0;
+            animator.SetBool("IsInteracting", true);
+            return;
+        }
+        else
+        {
+            animator.SetBool("IsInteracting", false);
+        }
+
         animator.SetBool("IsMoving", Mathf.Abs(horizontalInput) >= 0.01);
 
         SpriteRenderer mySpriteRenderer = GetComponent<SpriteRenderer>();
@@ -63,6 +74,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Ladder") {
             isOnLadder = false;
             rb.gravityScale = 1;
+            animator.SetBool("IsClimbing", false);
         } 
     }
 }

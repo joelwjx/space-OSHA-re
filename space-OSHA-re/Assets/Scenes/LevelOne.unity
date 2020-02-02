@@ -5437,6 +5437,7 @@ GameObject:
   - component: {fileID: 555355511}
   - component: {fileID: 555355513}
   - component: {fileID: 555355514}
+  - component: {fileID: 555355515}
   m_Layer: 0
   m_Name: Water Generator
   m_TagString: Untagged
@@ -5597,6 +5598,18 @@ MonoBehaviour:
   GraceTimer: 0
   PlayerInArea: 0
   sprite: {fileID: 0}
+--- !u!114 &555355515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555355508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84f9277cc1ba1bc43810da93cacdded0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &570640543
 GameObject:
   m_ObjectHideFlags: 0
@@ -7571,6 +7584,7 @@ GameObject:
   - component: {fileID: 761076410}
   - component: {fileID: 761076411}
   - component: {fileID: 761076413}
+  - component: {fileID: 761076412}
   m_Layer: 0
   m_Name: Oxygen Generator
   m_TagString: Untagged
@@ -7690,6 +7704,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 16.67, y: 10.29}
   m_EdgeRadius: 0
+--- !u!114 &761076412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761076407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84f9277cc1ba1bc43810da93cacdded0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &761076413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10053,6 +10079,7 @@ GameObject:
   - component: {fileID: 1002101827}
   - component: {fileID: 1002101828}
   - component: {fileID: 1002101829}
+  - component: {fileID: 1002101830}
   m_Layer: 0
   m_Name: Power Generator
   m_TagString: Untagged
@@ -10172,6 +10199,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.7800045, y: 14.29}
   m_EdgeRadius: 0
+--- !u!114 &1002101830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1002101825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84f9277cc1ba1bc43810da93cacdded0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1035024558
 GameObject:
   m_ObjectHideFlags: 0
