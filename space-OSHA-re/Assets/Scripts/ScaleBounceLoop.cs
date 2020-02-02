@@ -1,13 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ScaleBounceLoop : MonoBehaviour
 {
     [SerializeField] private bool playOnAwake;
-    [SerializeField, Min(0)] private float loopTime;
+    [SerializeField, Min(0)] private float loopTime = 0;
     [SerializeField] private AnimationCurve xScaleCurve;
     [SerializeField] private AnimationCurve yScaleCurve;
+    [SerializeField, Min(0)] private float initialDelay = 0;
     [SerializeField, Min(0), Tooltip("The percentage (as a decimal) of the initial scale that will change per second when the loop is stopped")]
     private float stopPercentage;
 
@@ -34,6 +34,13 @@ public class ScaleBounceLoop : MonoBehaviour
 
     private IEnumerator PlayRoutine()
     {
+        float delayTimer = 0;
+        while(delayTimer < initialDelay)
+        {
+            yield return null;
+            delayTimer += Time.deltaTime;
+        }
+
         float playTime = 0;
         Vector3 initialScale = transform.localScale;
 
