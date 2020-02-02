@@ -29,7 +29,7 @@ public class Flammable : MonoBehaviour
     public bool PlayerInArea = false;
 
     public delegate void BurnEvent();
-    public static event BurnEvent StartBurning;
+    public event BurnEvent OnBurn;
 
     [SerializeField] private SpriteRenderer sprite;
 
@@ -135,6 +135,7 @@ public class Flammable : MonoBehaviour
         if(FireIcon) FireIcon.gameObject.SetActive(true);
 
         SetSpriteColor(Color.red);
+        OnBurn?.Invoke();
     }
 
     void Break()

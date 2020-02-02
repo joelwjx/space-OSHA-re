@@ -27,6 +27,8 @@ public class WaterGeneratorController : Subsystem
 
         Interval = 5;
         TimeElapsed = 0f;
+
+        GetComponent<Flammable>().OnBurn += StartBurning;
     }
 
     // Update is called once per frame
@@ -66,6 +68,11 @@ public class WaterGeneratorController : Subsystem
         Color spriteColor = sprite.color;
         spriteColor.a = value ? 1 : 0.5f;
         sprite.color = spriteColor;
+    }
+
+    void StartBurning()
+    {
+        Debug.Log("Water started burning");
     }
 }
 
