@@ -2779,7 +2779,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1815703940}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &457715118
 SpriteRenderer:
@@ -3176,7 +3176,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1815703940}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &555355510
 SpriteRenderer:
@@ -3245,9 +3245,9 @@ MonoBehaviour:
   WaterDecrements: 0
   LevelDisplay: {fileID: 1080802500}
   Interval: 0
-  BurningIcon: {fileID: 1940597471301933685, guid: a3fe20d13c80f9a4cbc63170d7403a5c,
+  BurningIconPrefab: {fileID: 1940597471301933685, guid: a3fe20d13c80f9a4cbc63170d7403a5c,
     type: 3}
-  WarningIcon: {fileID: 5513312409596686629, guid: 6920a6176a79e5c4eaaf9294efd6ee7e,
+  WarningIconPrefab: {fileID: 5513312409596686629, guid: 6920a6176a79e5c4eaaf9294efd6ee7e,
     type: 3}
 --- !u!114 &555355512
 MonoBehaviour:
@@ -5005,6 +5005,10 @@ MonoBehaviour:
   OxygenIncrements: 0
   LevelDisplay: {fileID: 339610726}
   Interval: 0
+  BurningIconPrefab: {fileID: 1940597471301933685, guid: a3fe20d13c80f9a4cbc63170d7403a5c,
+    type: 3}
+  WarningIconPrefab: {fileID: 5513312409596686629, guid: 6920a6176a79e5c4eaaf9294efd6ee7e,
+    type: 3}
 --- !u!61 &761076411
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10504,8 +10508,8 @@ Transform:
   - {fileID: 649207829}
   - {fileID: 389887211}
   - {fileID: 1814850401}
-  - {fileID: 555355509}
   - {fileID: 457715117}
+  - {fileID: 555355509}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

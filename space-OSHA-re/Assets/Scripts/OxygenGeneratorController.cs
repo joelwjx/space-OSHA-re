@@ -15,6 +15,11 @@ public class OxygenGeneratorController : Subsystem
     public float Interval;
     private float TimeElapsed;
 
+    public GameObject BurningIconPrefab;
+    public GameObject WarningIconPrefab;
+    private GameObject burningIcon;
+    private GameObject warningIcon;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +34,10 @@ public class OxygenGeneratorController : Subsystem
 
         Interval = 3f;
         TimeElapsed = 0f;
+
+        GetComponent<Flammable>().OnBurn += StartBurning;
+        GetComponent<Flammable>().OnIgnite += StartIgniting;
+        GetComponent<Flammable>().OnExtinguish += Extinguish;
     }
 
     // Update is called once per frame
@@ -69,5 +78,22 @@ public class OxygenGeneratorController : Subsystem
         Color spriteColor = sprite.color;
         spriteColor.a = value ? 1 : 0.5f;
         sprite.color = spriteColor;
+    }
+
+    void StartBurning()
+    {
+        Destroy(warningIcon);
+        burningIcon = Instantiate(BurningIconPrefab, LevelDisplay.transform.position + new Vector3(25, -4), Quaternion.identity, LevelDisplay.transform.parent);
+    }
+
+    void StartIgniting()
+    {
+        warningIcon = Instantiate(WarningIconPrefab, LevelDisplay.transform.position + new Vector3(25, -4), Quaternion.identity, LevelDisplay.transform.parent);
+    }
+
+    void Extinguish()
+    {
+        if (warningIcon != null) Destroy(warningIcon);
+        if (burningIcon != null) Destroy(burningIcon);
     }
 }

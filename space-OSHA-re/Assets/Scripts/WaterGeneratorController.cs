@@ -36,6 +36,7 @@ public class WaterGeneratorController : Subsystem
 
         GetComponent<Flammable>().OnBurn += StartBurning;
         GetComponent<Flammable>().OnIgnite += StartIgniting;
+        GetComponent<Flammable>().OnExtinguish += Extinguish;
     }
 
     // Update is called once per frame
@@ -79,12 +80,19 @@ public class WaterGeneratorController : Subsystem
 
     void StartBurning()
     {
+        Destroy(warningIcon);
         burningIcon = Instantiate(BurningIconPrefab, LevelDisplay.transform.position + new Vector3(25, -4), Quaternion.identity, LevelDisplay.transform.parent);
     }
 
     void StartIgniting()
     {
         warningIcon = Instantiate(WarningIconPrefab, LevelDisplay.transform.position + new Vector3(25, -4), Quaternion.identity, LevelDisplay.transform.parent);
+    }
+
+    void Extinguish()
+    {
+        if (warningIcon != null) Destroy(warningIcon);
+        if (burningIcon != null) Destroy(burningIcon);
     }
 }
 

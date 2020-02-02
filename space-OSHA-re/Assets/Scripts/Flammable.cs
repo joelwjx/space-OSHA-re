@@ -34,6 +34,9 @@ public class Flammable : MonoBehaviour
     public delegate void IgniteEvent();
     public event IgniteEvent OnIgnite;
 
+    public delegate void ExtinguishEvent();
+    public event ExtinguishEvent OnExtinguish;
+
     [SerializeField] private SpriteRenderer sprite;
 
     // Start is called before the first frame update
@@ -43,7 +46,7 @@ public class Flammable : MonoBehaviour
         IsBurning = false;
         IsBroken = false;
 
-        TimeToBurn = 3f;
+        TimeToBurn = 20f;
         BurnTimer = 0;
 
         TimeToBreak = 30f;
@@ -191,6 +194,7 @@ public class Flammable : MonoBehaviour
         ResetFixProgress();
 
         GraceTimer = GraceInterval;
+        OnExtinguish?.Invoke();
     }
 
     void OnTriggerEnter2D(Collider2D collider)
