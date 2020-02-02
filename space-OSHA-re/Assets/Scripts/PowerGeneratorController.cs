@@ -12,16 +12,28 @@ public class PowerGeneratorController : MonoBehaviour
     public float powerDropTimer;
 
     private SpriteRenderer sprite;
+    public bool PlayerInArea;
+
+    public float ChargeMeter;
+    public float ChargeRate;
+
+    public GameObject ProgressBarPrefab;
+    private GameObject progressBar;
 
     // Start is called before the first frame update
     void Start()
     {
         PowerLevel = 100;
 
-        powerDropInterval = 0.5f;
+        powerDropInterval = 2f;
         powerDropTimer = powerDropInterval;
 
         sprite = GetComponent<SpriteRenderer>();
+
+        ChargeMeter = 0f;
+        ChargeRate = 5f;
+
+        progressBar = Instantiate(ProgressBarPrefab, gameObject.transform, false);
     }
 
     void Update()
@@ -40,13 +52,16 @@ public class PowerGeneratorController : MonoBehaviour
         }
 
         DisplayText.text = PowerLevel.ToString("000");
-    }
 
-    void OnTriggerStay2D(Collider2D collide)
-    {
-        if (collide.gameObject.tag == "Player" && Input.GetKeyDown("e"))
+        if (PlayerInArea && Input.GetKey("e"))
         {
-            PowerLevel = 100;
+            ChargeMeter += Time.deltaTime;
+            progressBar.transform.localScale = new Vector3(ChargeMeter / ChargeRate, 0.1f, 0);
+            if (ChargeMeter >= ChargeRate)
+            {
+                ChargeMeter = 0;
+                PowerLevel += 25;
+            }
         }
     }
 
@@ -54,6 +69,7 @@ public class PowerGeneratorController : MonoBehaviour
     {
         if (collide.gameObject.tag == "Player")
         {
+            PlayerInArea = true;
             Color spriteColor = sprite.color;
             spriteColor.a = 0.75f;
             sprite.color = spriteColor;
@@ -64,6 +80,7 @@ public class PowerGeneratorController : MonoBehaviour
     {
         if (collide.gameObject.tag == "Player")
         {
+            PlayerInArea = false;
             Color spriteColor = sprite.color;
             spriteColor.a = 1;
             sprite.color = spriteColor;

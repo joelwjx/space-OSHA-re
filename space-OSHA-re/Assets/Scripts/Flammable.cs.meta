@@ -3,7 +3,11 @@ guid: 0e33b0f760012754a91b15d539ab7522
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - ProgressBar: {fileID: 3719428716865345649, guid: 471fbcc7bb9454541baa3a10f6940921,
+      type: 3}
+  - FireIcon: {instanceID: 0}
+  - sprite: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
