@@ -21,6 +21,17 @@ public class PlayerController : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+        SpriteRenderer mySpriteRenderer = GetComponent<SpriteRenderer>();
+        if (horizontalInput > 0)
+        {
+            Debug.Log("Moving right");
+            mySpriteRenderer.flipX = false;
+        } else if (horizontalInput < 0)
+        {
+            Debug.Log("Moving left");
+            mySpriteRenderer.flipX = true;
+        }
+
 
         if (isOnLadder && verticalInput > 0)
         {
