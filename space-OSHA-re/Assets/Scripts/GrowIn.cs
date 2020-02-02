@@ -28,16 +28,10 @@ public class GrowIn : MonoBehaviour
                 xSizeCurve.Evaluate(e),
                 ySizeCurve.Evaluate(e),
                 1);
-            transform.localScale = VectorMul(initialScale, normalizedScale);
+            transform.localScale = initialScale.Mul(normalizedScale);
             yield return null;
             timer += Time.deltaTime;
         }
         transform.localScale = initialScale;
-    }
-
-    // This isn't a native function?!?!?!?!
-    private Vector3 VectorMul(Vector3 a, Vector3 b)
-    {
-        return new Vector3(a.x * b.x, a.y * b.y, a.z * b.z);
     }
 }
