@@ -7,8 +7,7 @@ public class WaterGeneratorController : Subsystem
 {
     public int WaterLevel;
     public int WaterDecrements;
-    public Text DisplayText;
-    public PowerGeneratorController generator;
+    public GameObject LevelDisplay;
 
     private SpriteRenderer sprite;
 
@@ -19,6 +18,8 @@ public class WaterGeneratorController : Subsystem
     void Start()
     {
         WaterLevel = 50;
+        LevelDisplay.transform.localScale = new Vector3((WaterLevel / 100f) * 2, 0.1f, 0);
+
         WaterDecrements = 3;
 
         isActivated = true;
@@ -26,13 +27,11 @@ public class WaterGeneratorController : Subsystem
 
         Interval = 5;
         TimeElapsed = 0f;
-        powerLevel = generator.PowerLevel;
     }
 
     // Update is called once per frame
     void Update()
     {
-        powerLevel = generator.PowerLevel;
         if (!isActivated)
         {
             if (TimeElapsed <= Interval)
@@ -42,7 +41,7 @@ public class WaterGeneratorController : Subsystem
             else
             {
                 if (WaterLevel > 0) WaterLevel -= WaterDecrements;
-                DisplayText.text = WaterLevel.ToString("000");
+                LevelDisplay.transform.localScale = new Vector3((WaterLevel / 100f) * 2, 0.1f, 0);
                 TimeElapsed = 0f;
             }
         }
@@ -55,7 +54,7 @@ public class WaterGeneratorController : Subsystem
             else
             {
                 if (WaterLevel < 100) WaterLevel += WaterDecrements;
-                DisplayText.text = WaterLevel.ToString("000");
+                LevelDisplay.transform.localScale = new Vector3((WaterLevel / 100f) * 2, 0.1f, 0);
                 TimeElapsed = 0f;
             }
         }

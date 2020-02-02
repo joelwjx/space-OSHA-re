@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ladder
   layers:
   - Default
   - TransparentFX
@@ -44,6 +45,15 @@ TagManager:
   - name: Perspective
     uniqueID: 1283273188
     locked: 0
-  - name: Top
+  - name: Background
     uniqueID: 1502599955
+    locked: 0
+  - name: Environment
+    uniqueID: 1160427001
+    locked: 0
+  - name: Character
+    uniqueID: 4055695497
+    locked: 0
+  - name: Foreground
+    uniqueID: 1338335501
     locked: 0

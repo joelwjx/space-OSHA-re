@@ -8,8 +8,7 @@ public class OxygenGeneratorController : Subsystem
     public int OxygenLevel;
     public int OxygenDecrements;
     public int OxygenIncrements;
-    public Text DisplayText;
-    public PowerGeneratorController generator;
+    public GameObject LevelDisplay;
 
     private SpriteRenderer sprite;
 
@@ -20,11 +19,12 @@ public class OxygenGeneratorController : Subsystem
     void Start()
     {
         OxygenLevel = 50;
+        LevelDisplay.transform.localScale = new Vector3((OxygenLevel / 100f) * 2, 0.1f, 0);
+
         OxygenDecrements = 5;
         OxygenIncrements = 1;
 
         isActivated = true;
-        powerLevel = generator.PowerLevel;
         sprite = GetComponent<SpriteRenderer>();
 
         Interval = 0.5f;
@@ -44,7 +44,7 @@ public class OxygenGeneratorController : Subsystem
             {
                 if (OxygenLevel > 0) OxygenLevel -= OxygenDecrements;
                 if (OxygenLevel <= 0) GameStateManager.instance.InitiateLoseState();
-                DisplayText.text = OxygenLevel.ToString("000");
+                LevelDisplay.transform.localScale = new Vector3((OxygenLevel / 100f) * 2, 0.1f, 0);
                 TimeElapsed = 0f;
             }
         }
@@ -57,8 +57,7 @@ public class OxygenGeneratorController : Subsystem
             else
             {
                 if (OxygenLevel < 100) OxygenLevel += OxygenIncrements;
-                DisplayText.text = OxygenLevel.ToString("000");
-
+                LevelDisplay.transform.localScale = new Vector3((OxygenLevel / 100f) * 2, 0.1f, 0);
                 TimeElapsed = 0f;
             }
         }

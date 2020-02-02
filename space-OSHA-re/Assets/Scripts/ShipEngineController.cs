@@ -7,7 +7,6 @@ public class ShipEngineController : Subsystem
 {
     public float DistanceTravelled;
     public Text DisplayText;
-    public PowerGeneratorController generator;
 
     private SpriteRenderer sprite;
     
@@ -17,14 +16,12 @@ public class ShipEngineController : Subsystem
         isActivated = true;
         sprite = GetComponent<SpriteRenderer>();
 
-        powerLevel = generator.PowerLevel;
         DistanceTravelled = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        powerLevel = generator.PowerLevel;
         if (isActivated)
         {
             DistanceTravelled += Time.deltaTime;

@@ -168,7 +168,6 @@ public class Flammable : MonoBehaviour
 
     void Extinguish()
     {
-        Debug.Log("Extinguish");
         IsBurning = false;
         IsIgniting = false;
         if(FireIcon) FireIcon.gameObject.SetActive(false);

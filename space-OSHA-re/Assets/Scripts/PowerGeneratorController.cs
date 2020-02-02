@@ -6,12 +6,11 @@ using UnityEngine.UI;
 public class PowerGeneratorController : MonoBehaviour
 {
     public int PowerLevel;
-    public Text DisplayText;
+    public GameObject LevelDisplay;
 
     public float powerDropInterval;
     public float powerDropTimer;
 
-    private SpriteRenderer sprite;
     public bool PlayerInArea;
 
     public float ChargeMeter;
@@ -25,10 +24,8 @@ public class PowerGeneratorController : MonoBehaviour
     {
         PowerLevel = 100;
 
-        powerDropInterval = 2f;
+        powerDropInterval = 3f;
         powerDropTimer = powerDropInterval;
-
-        sprite = GetComponent<SpriteRenderer>();
 
         ChargeMeter = 0f;
         ChargeRate = 5f;
@@ -51,28 +48,33 @@ public class PowerGeneratorController : MonoBehaviour
             powerDropTimer = powerDropInterval;
         }
 
-        DisplayText.text = PowerLevel.ToString("000");
+        LevelDisplay.transform.localScale = new Vector3((PowerLevel / 100f) * 2, 0.1f, 0);
+        //DisplayText.text = PowerLevel.ToString("000");
 
         if (PlayerInArea && Input.GetKey("e"))
         {
             ChargeMeter += Time.deltaTime;
-            progressBar.transform.localScale = new Vector3(ChargeMeter / ChargeRate, 0.1f, 0);
+            progressBar.transform.localScale = new Vector3(ChargeMeter / ChargeRate * 30, 2, 0);
             if (ChargeMeter >= ChargeRate)
             {
                 ChargeMeter = 0;
-                PowerLevel += 25;
+                PowerLevel += 50;
+                if (PowerLevel >= 100) PowerLevel = 100;
             }
         }
+        else
+        {
+            ChargeMeter = 0;
+            progressBar.transform.localScale = new Vector3(0, 2, 0);
+        }
     }
+
 
     void OnTriggerEnter2D(Collider2D collide)
     {
         if (collide.gameObject.tag == "Player")
         {
             PlayerInArea = true;
-            Color spriteColor = sprite.color;
-            spriteColor.a = 0.75f;
-            sprite.color = spriteColor;
         }
     }
 
@@ -81,10 +83,6 @@ public class PowerGeneratorController : MonoBehaviour
         if (collide.gameObject.tag == "Player")
         {
             PlayerInArea = false;
-            Color spriteColor = sprite.color;
-            spriteColor.a = 1;
-            sprite.color = spriteColor;
         }
     }
-
 }

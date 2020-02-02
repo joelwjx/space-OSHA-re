@@ -12,8 +12,6 @@ public class ResourceManager : MonoBehaviour
 
     public int PowerLevel;
 
-    public Text PowerLevelText;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +20,8 @@ public class ResourceManager : MonoBehaviour
 
     void Update()
     {
+        PowerLevel = PowerGenerator.PowerLevel;
+
         if (PowerLevel <= 0)
         {
             OxygenGenerator.SetActiveState(false);
@@ -35,6 +35,5 @@ public class ResourceManager : MonoBehaviour
             ShipEngine.SetActiveState(true);
         }
 
-        PowerLevel = PowerGenerator.PowerLevel;
     }
 }
