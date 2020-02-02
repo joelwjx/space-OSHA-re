@@ -18,7 +18,7 @@ public class ShipEngineController : Subsystem
         sprite = GetComponent<SpriteRenderer>();
 
         DistanceTravelled = 0f;
-        GoalDistance = 100f;
+        GoalDistance = 200f;
         LevelDisplay.transform.localScale = new Vector3((DistanceTravelled / GoalDistance) * 9, 0.1f, 0);
     }
 

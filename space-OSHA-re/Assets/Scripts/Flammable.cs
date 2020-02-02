@@ -31,6 +31,9 @@ public class Flammable : MonoBehaviour
     public delegate void BurnEvent();
     public event BurnEvent OnBurn;
 
+    public delegate void IgniteEvent();
+    public event IgniteEvent OnIgnite;
+
     [SerializeField] private SpriteRenderer sprite;
 
     // Start is called before the first frame update
@@ -40,10 +43,10 @@ public class Flammable : MonoBehaviour
         IsBurning = false;
         IsBroken = false;
 
-        TimeToBurn = 10f;
+        TimeToBurn = 3f;
         BurnTimer = 0;
 
-        TimeToBreak = 13f;
+        TimeToBreak = 30f;
         BreakTimer = 0;
 
         FixBurnRating = 3f;
@@ -124,6 +127,7 @@ public class Flammable : MonoBehaviour
         ResetFixProgress();
 
         SetSpriteColor(Color.yellow);
+        OnIgnite?.Invoke();
     }
 
     void Burn()

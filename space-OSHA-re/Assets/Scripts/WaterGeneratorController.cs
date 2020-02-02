@@ -14,6 +14,12 @@ public class WaterGeneratorController : Subsystem
     public float Interval;
     private float TimeElapsed;
 
+    public GameObject BurningIconPrefab;
+    public GameObject WarningIconPrefab;
+
+    private GameObject burningIcon;
+    private GameObject warningIcon;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +35,7 @@ public class WaterGeneratorController : Subsystem
         TimeElapsed = 0f;
 
         GetComponent<Flammable>().OnBurn += StartBurning;
+        GetComponent<Flammable>().OnIgnite += StartIgniting;
     }
 
     // Update is called once per frame
@@ -72,7 +79,12 @@ public class WaterGeneratorController : Subsystem
 
     void StartBurning()
     {
-        Debug.Log("Water started burning");
+        burningIcon = Instantiate(BurningIconPrefab, LevelDisplay.transform.position + new Vector3(25, -4), Quaternion.identity, LevelDisplay.transform.parent);
+    }
+
+    void StartIgniting()
+    {
+        warningIcon = Instantiate(WarningIconPrefab, LevelDisplay.transform.position + new Vector3(25, -4), Quaternion.identity, LevelDisplay.transform.parent);
     }
 }
 
