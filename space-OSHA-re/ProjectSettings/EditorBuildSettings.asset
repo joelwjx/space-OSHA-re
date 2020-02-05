@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/IntroAndTitleScene.unity
     guid: b78b39104d0ed314fae6da8ce2ec6336
   - enabled: 1
+    path: Assets/Scenes/LevelOne.unity
+    guid: fb5b69d2cab9c6249b57bb77e662ea8d
+  - enabled: 1
     path: Assets/Scenes/WinScreen.unity
     guid: 05e5649244c674c468fc256e9c49624f
   - enabled: 1
